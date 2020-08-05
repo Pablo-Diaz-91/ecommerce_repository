@@ -3,16 +3,17 @@
 //elementos HTML presentes.
 let productArray = [];
 
-function showProducts(arry) {
+function showProducts(array) {
     let contenido = "";
-    for (let i = 0 ; i < arry.length ; i++){
+    for (let i = 0 ; i < array.length ; i++){
         let productList = array[i];
 
         contenido += `
         <div class="product-container">
+            <img src=`+ productList.imgSrc +`>
             <h3>`+ productList.name +`</h3>
-            <p>`+ productList.description +`</p>
-            <p>` + productList.cost +`</p>
+            <p>Descripción: `+ productList.description +`</p>
+            <p>Precio: `+ productList.currency +` `+ productList.cost +`</p>
         `
         document.getElementById("product-list").innerHTML = contenido;
     }
