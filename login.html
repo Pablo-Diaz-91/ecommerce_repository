@@ -38,14 +38,17 @@
 </head>
 
 <body class="text-center">
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 1 (Fecha de entrega: 16/08/2020) -> Punto 3 y 4.</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
-    </div>
-  </div>
+  <form action="">
+    <img src="/img/login.png" alt="login picture">
+    <h1>Sign in</h1>
+    <label for="email">
+      <input type="email" name="email" id="email" placeholder="Enter Your Email" required autofocus>
+    </label>
+    <label for="password">
+      <input type="password" name="password" id="password" placeholder="Enter Your Password" required>
+    </label>
+    <button class="signin" id="btn-sign-in" type="submit">Sign in</button>
+  </form>
 
   <script src="js/init.js"></script>
   <script src="js/login.js"></script>
