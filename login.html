@@ -38,14 +38,15 @@
 </head>
 
 <body class="text-center">
-  <form action="">
-    <img src="/img/login.png" alt="login picture">
-    <h1>Sign in</h1>
-    <label for="email">
-      <input type="email" name="email" id="email" placeholder="Enter Your Email" required autofocus>
-    </label>
-    <label for="password">
-      <input type="password" name="password" id="password" placeholder="Enter Your Password" required>
+
+  <form class="login-form" action="index.html">
+    <img id="image-login" src="img/login.png" alt="login picture">
+    <h2 id="sign-title">Sign in</h2>
+    <label class="label-signin" for="email">
+      <input type="email" name="email" id="email" placeholder="Enter Your Email" size="30" required autofocus>
+    </label></br>
+    <label class="label-signin" for="password">
+      <input type="password" name="password" id="password" placeholder="Enter Your Password" size="30" required>
     </label>
     <button class="signin" id="btn-sign-in" type="submit">Sign in</button>
   </form>
