@@ -139,3 +139,155 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+
+/*---LOGIN-------------------------------------------*/
+
+.login-form {
+  margin: auto;
+  padding: 10px;
+  max-width: 500px;
+  background-color: rgb(80, 80, 131);
+  border: 3px outset lightgray;
+}
+
+#image-login {
+  width: 400px;
+}
+
+#sign-title {
+  padding: 20px 0px;
+  color: #fff;
+}
+
+.label-signin {
+  margin: 0;
+}
+
+#btn-sign-in {
+  margin-top: 30px;
+  background-color: rgb(6, 94, 150);
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+#btn-sign-in:hover {
+  background-color: lightskyblue;
+  color: black;
+}
+
+
+/*---PRODUCTOS---------------------------------------*/
+
+/*---Slides---*/
+
+.container-slides {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 80px auto;
+  width: fit-content;
+  border-radius: 15%;
+}
+
+#slide-title {
+  position: absolute;
+  font-size: 2.5rem;
+  padding-left: 50px;
+  padding-top: 15px;
+}
+
+.slide {
+  border-radius: 10%;
+  border: 0.5px solid gray;
+  box-shadow: 0px 0px 50px 50px rgb(169, 234, 255),
+  0px 0px 70px 20px inset;
+}
+
+@media (max-width: 100vh) {
+  .slide {
+    width: 100%;
+  }
+  #slide-title {
+    padding-left: 30px;
+    padding-top: 10px;
+    font-size: 1.5rem;
+  }
+}
+
+.img-break-img {
+  margin: 40px auto 80px auto;
+  width: 100%;
+  height: 200px;
+}
+
+
+/*--Contenedores de productos--*/
+
+/*--Lista de productos--*/
+h3{
+  text-align: center;
+  font-size: 3rem;
+}
+
+.product-content {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, .125);
+  box-shadow: 0px 0px 90px -10px inset,
+  0px 0px 60px -8px;
+  align-items: center;
+  transition: all .2s;
+}
+
+.product-content:hover {
+  background-image: radial-gradient(rgb(204, 249, 255), rgb(85, 245, 245), rgb(0, 225, 255));
+  border: 1px solid rgba(0, 0, 0, .125);
+  box-shadow: 0px 0px 60px 10px inset,
+  0px 0px 100px 100px lightblue;
+}
+
+/*--Contenedor Imagen + Descripción--*/
+.product-img-description {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1.7rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-img{
+  margin: 20px;
+  padding: 5px;
+  width: 40%;
+  min-width: 200px;
+  height: auto;
+  background-color: rgb(224, 220, 220);
+  border: 1px solid gray;
+  box-shadow: 0px 0px 30px 10px;
+  cursor: zoom-in;
+}
+
+.description {
+  width: 55%;
+  padding: 10px;
+}
+
+
+/*---SUSTITUIR FUNCIONALIDAD---*/
+.product-img:active {
+  position: absolute;
+  margin: 50px auto;
+  border: 1px solid black;
+  border-radius: 5%;
+  zoom: 250%;
+}
+
+/*--Precio--*/
+p.price {
+  margin-top: 40px;
+  padding: 0 20px;
+  text-align: center;
+  font-size: 2.5rem;
+}
