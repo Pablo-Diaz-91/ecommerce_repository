@@ -34,12 +34,12 @@ function showProducts(array) {
 
     for (let i = 0 ; i < array.length ; i++){
         let productList = array[i];
-        
+
         contenido += `
             <div class="product-content">
                 <h3 id=`+ i +`>`+ productList.name +`</h3>
                     <div class="product-img-description">
-                        <img class="product-img" src=`+ productList.imgSrc +`>
+                        <img class="product-img" src=`+ productList.imgSrc +` alt="Productos">
                         <p class="description">Descripción: `+ productList.description +`</p>
                     </div>
                 <p class="price"><strong>Precio: </strong>`+ productList.currency +` `+ productList.cost +`</p>
