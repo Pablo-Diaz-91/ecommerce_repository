@@ -2,9 +2,20 @@
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 
+
+/* --- VARIABLES GLOBALES --- */
+const ORDER_ASC_BY_PRICE = 'cost -> COST';
+const ORDER_DESC_BY_PRICE = 'COST -> cost';
+const ORDER_BY_RELEVANCE = 'REL -> rel';
+
 let productArray = [];
 
-/*SLIDES*/
+var minPrice = undefined;
+var maxPrice = undefined;
+/* --- FIN VARIABLES GLOBALES --- */
+
+
+/* --- SLIDES --- */
 let c = 0;
 let time = 2500;
 
@@ -23,34 +34,81 @@ function changeImg(){
     }
 
     setTimeout(changeImg, time);
-
 }
+/* --- FIN SLIDES FUNCTION --- */
 
 
-/*PRODUCTOS*/
+/* --- SORT --- */
+function sortProducts(criterio, array) {
+    let result = [];
 
+    if (criterio === ORDER_ASC_BY_PRICE){
+        result = array.sort(function (a, b){
+            if (a.cost < b.cost) { return -1; }
+            if (a.cost > b.cost) { return 1; }
+            return 0;
+        });
+
+    } else if (criterio === ORDER_DESC_BY_PRICE) {
+        result = array.sort(function (a, b){
+            if (a.cost > b.cost) { return -1; }
+            if (a.cost < b.cost) { return 1; }
+            return 0;
+        });
+    } else if (criterio === ORDER_BY_RELEVANCE) {
+        result = array.sort(function (a, b){
+            if (a.soldCount > b.soldCount) { return -1; }
+            if (a.soldCount < b.soldCount) { return 1; }
+            return 0;
+        })
+    }
+    return result;
+}
+/* --- FIN SORT FUNCTION --- */
+
+/* --- EJECUCIONES DEL SORT ---*/
+document.getElementById('price-asc').addEventListener('click', function(){
+    productArray = sortProducts(ORDER_ASC_BY_PRICE, productArray);
+    showProducts(productArray);
+});
+
+document.getElementById('price-desc').addEventListener('click', function (){
+    productArray = sortProducts(ORDER_DESC_BY_PRICE, productArray);
+    showProducts(productArray);
+});
+
+document.getElementById('relevancia').addEventListener('click', function(){
+    productArray = sortProducts(ORDER_BY_RELEVANCE, productArray);
+    showProducts(productArray);
+});
+/* --- FIN DE LAS EJECUCIONES SORT ---*/
+
+/* --- PRODUCTOS --- */
 function showProducts(array) {
     let contenido = "";
 
     for (let i = 0 ; i < array.length ; i++){
         let productList = array[i];
 
-        contenido += `
+        if (((minPrice == undefined) || (minPrice != undefined && parseInt(productList.cost) >= minPrice)) && ((maxPrice == undefined) || (maxPrice != undefined && parseInt(productList.cost) <= maxPrice))) {
+            
+            contenido += `
             <div class="product-content">
-                <h3 id=`+ i +`>`+ productList.name +`</h3>
+                <h3 id=`+ i + `>` + productList.name + `</h3>
                     <div class="product-img-description">
-                        <img class="product-img" src=`+ productList.imgSrc +` alt="Productos">
-                        <p class="description">Descripción: `+ productList.description +`</p>
+                        <img class="product-img" src=`+ productList.imgSrc + ` alt="Productos">
+                        <p class="description">Descripción: `+ productList.description + `</p>
                     </div>
-                <p class="price"><strong>Precio: </strong>`+ productList.currency +` `+ productList.cost +`</p>
+                <p class="price"><strong>Precio: </strong>`+ productList.currency + ` ` + productList.cost + `</p>
             </div>
             `
-        document.getElementById("product-list").innerHTML = contenido;
+        }    
         
+        document.getElementById("product-list").innerHTML = contenido;
     }
     changeImg();
 }
-
+/* --- FIN SHOWPRODUCTS FUNCTION --- */
 
 
 document.addEventListener("DOMContentLoaded", function (e) {
@@ -61,3 +119,38 @@ document.addEventListener("DOMContentLoaded", function (e) {
         }
     })
 });
+
+
+/* --- FILTROS --- */
+document.getElementById('filtrar').addEventListener('click', function(){
+    minPrice = document.getElementById('min').value;
+    maxPrice = document.getElementById('max').value;
+
+    if ((minPrice != undefined) && (minPrice != "") && (parseInt(minPrice) >=0)){
+        minPrice = parseInt(minPrice);
+    } else {
+        minPrice = undefined;
+    }
+
+    if ((maxPrice != undefined) && (maxPrice != "") && (parseInt(maxPrice) >= 0)){
+        maxPrice = parseInt(maxPrice);
+    } else {
+        maxPrice = undefined;
+    }
+
+    showProducts(productArray);
+});
+/* --- FIN FILTROS FUNCTION --- */
+
+
+/* --- LIMPIAR --- */
+document.getElementById('limpiar').addEventListener('click', function(){
+    document.getElementById('min').value = '';
+    document.getElementById('max').value = '';
+
+    minPrice = undefined;
+    maxPrice = undefined;
+
+    showProducts(productArray);
+});
+/* --- FIN LIMPIAR FUNCTION --- */
