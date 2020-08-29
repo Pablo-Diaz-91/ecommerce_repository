@@ -43,5 +43,20 @@ var getJSONData = function(url){
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
+//Función que guarda el usuario loggeado
 document.addEventListener("DOMContentLoaded", function(e){
+  let userLogged = localStorage.getItem('user-logged');
+  let userInfo = document.getElementById('user-info');
+  let user = document.getElementById('user');
+
+  if (userLogged) {
+    userLogged = JSON.parse(userLogged);
+    user.innerText += 'Usuario: ' + userLogged.email;
+    userInfo.style = 'display: flex';
+  }
+
+  document.getElementById('log-out').addEventListener('click', function(){
+    localStorage.removeItem('user-logged');
+    window.location = 'index.html'
+  })
 });
