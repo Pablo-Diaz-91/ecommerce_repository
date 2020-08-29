@@ -15,30 +15,7 @@ var maxPrice = undefined;
 /* --- FIN VARIABLES GLOBALES --- */
 
 
-/* --- SLIDES --- */
-let c = 0;
-let time = 2500;
-
-function changeImg(){
-    let reference = document.getElementById("reference-img");
-    let slideTitle = document.getElementById("slide-title");
-
-    slideTitle.innerHTML = productArray[c].name;
-    document.slide.src = productArray[c].imgSrc;
-    reference.href = "#" + c;
-    
-    c++;
-
-    if (c > productArray.length - 1) {
-        c=0;
-    }
-
-    setTimeout(changeImg, time);
-}
-/* --- FIN SLIDES FUNCTION --- */
-
-
-/* --- SORT --- */
+/* --- FUNCIÓN SORT --- */
 function sortProducts(criterio, array) {
     let result = [];
 
@@ -64,7 +41,8 @@ function sortProducts(criterio, array) {
     }
     return result;
 }
-/* --- FIN SORT FUNCTION --- */
+/* --- FIN FUNCIÓN SORT --- */
+
 
 /* --- EJECUCIONES DEL SORT ---*/
 document.getElementById('price-asc').addEventListener('click', function(){
@@ -83,7 +61,31 @@ document.getElementById('relevancia').addEventListener('click', function(){
 });
 /* --- FIN DE LAS EJECUCIONES SORT ---*/
 
-/* --- PRODUCTOS --- */
+
+/* --- FUNCIÓN SLIDES --- */
+let c = 0;
+let time = 2500;
+
+function changeImg() {
+    let reference = document.getElementById("reference-img");
+    let slideTitle = document.getElementById("slide-title");
+
+    slideTitle.innerHTML = productArray[c].name;
+    document.slide.src = productArray[c].imgSrc;
+    reference.href = "#" + c;
+
+    c++;
+
+    if (c > productArray.length - 1) {
+        c = 0;
+    }
+
+    setTimeout(changeImg, time);
+}
+/* --- FIN FUNCIÓN SLIDES --- */
+
+
+/* --- FUNCIÓN MAQUETA PRODUCTOS --- */
 function showProducts(array) {
     let contenido = "";
 
@@ -108,9 +110,10 @@ function showProducts(array) {
     }
     changeImg();
 }
-/* --- FIN SHOWPRODUCTS FUNCTION --- */
+/* --- FIN FUNCIÓN MOSTRAR PRODUCTOS --- */
 
 
+/* --- FUNCIÓN PRODUCTOS DESDE JSON --- */
 document.addEventListener("DOMContentLoaded", function (e) {
     getJSONData(PRODUCTS_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
@@ -119,9 +122,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
         }
     })
 });
+/* --- FIN FUNCIÓN PRODUCTOS DESDE JSON --- */
 
 
-/* --- FILTROS --- */
+/* --- FUNCIÓN FILTRAR --- */
 document.getElementById('filtrar').addEventListener('click', function(){
     minPrice = document.getElementById('min').value;
     maxPrice = document.getElementById('max').value;
@@ -140,10 +144,10 @@ document.getElementById('filtrar').addEventListener('click', function(){
 
     showProducts(productArray);
 });
-/* --- FIN FILTROS FUNCTION --- */
+/* --- FIN FUNCIÓN FILTRAR --- */
 
 
-/* --- LIMPIAR --- */
+/* --- FUNCIÓN LIMPIAR --- */
 document.getElementById('limpiar').addEventListener('click', function(){
     document.getElementById('min').value = '';
     document.getElementById('max').value = '';
@@ -153,4 +157,4 @@ document.getElementById('limpiar').addEventListener('click', function(){
 
     showProducts(productArray);
 });
-/* --- FIN LIMPIAR FUNCTION --- */
+/* --- FIN FUNCIÓN LIMPIAR --- */
