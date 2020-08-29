@@ -21,6 +21,12 @@
         <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
         <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
         <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+
+        <div id="user-info">
+          <p id="user"></p>
+          <button id="log-out">Salir</button>
+        </div>
+
       </div>
     </nav>
     <main class="pb-5" role="main">
@@ -42,20 +48,24 @@
         <a href="cover.html"><img class="img-break-img" src="img/cover_back.png" alt="eCommerce image"></a>
       </div>
 
-      <div class="orders">
-        <p>Orden por precio o relevancia:</p>
-        <button id="price-asc">Precio ascendente</button>
-        <button id="price-desc">Precio descendente</button>
-        <button id="relevancia">Relevancia</button>
+      <div class="container-filters-orders">
+        <div class="orders">
+          <p>Orden por precio o relevancia:</p>
+          <button id="price-asc">Precio ascendente</button>
+          <button id="price-desc">Precio descendente</button>
+          <button id="relevancia">Relevancia</button>
+        </div>
+  
+        <div class="filtros-rangos">
+          <p>Filtros por precio:</p>
+          <input type="number" name="min" id="min" min="0" placeholder="Precio mínimo">
+          <input type="number" name="max" id="max" placeholder="Precio máximo">
+          <button id="filtrar">Filtrar</button>
+          <button id="limpiar">Limpiar filtro</button>
+        </div>
       </div>
 
-      <div class="filtros-rangos">
-        <p>Filtros por precio:</p>
-        <input type="number" name="min" id="min" min="0" placeholder="Precio mínimo">
-        <input type="number" name="max" id="max" placeholder="Precio máximo">
-        <button id="filtrar">Filtrar</button>
-        <button id="limpiar">Limpiar filtro</button>
-      </div>
+      <hr/>
 
       <div class="container">
       <!-- PROYECTO JAP - LISTA -->
