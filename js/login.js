@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         }
 
         if (camposCompletos) {
+            localStorage.setItem('user-logged', JSON.stringify({ email: inputEmail.value }));
             window.location = 'cover.html';
         }
     });
