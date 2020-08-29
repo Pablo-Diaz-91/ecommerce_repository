@@ -1,0 +1,271 @@
+---------------INDICE----------------
+1) LOGIN:
+    L.1) Función Login
+2) INIT:
+    I.1) Función Usuario y desloggeo
+    I.2) Función Log-out
+3) PRODUCTOS:
+    Variables (VGP)
+    P.1) Función Sort
+    P.2) Ejecuciones del Sort
+    P.3) Función Slides
+    P.4) Función Maqueta Productos
+    P.5) Función Productos Desde JSON
+    P.6) Función Filtrar
+    P.7) Función Limpiar
+
+================================================
+---------------LOGIN-----------------
+FUNCIÓN L.1
+-Función Login
+[Función que usaremos para evaluar campos y almacenar un usuario en LocalStorage]
+
+1. Creamos una función anónima que se ejecuta al cargarse el index.HTML (el login).
+2. Llamamos del index.html al botón al cuál al hacer click ejecutará otra función que desarrollamos a continuación.
+3. Dentro de la función mencionada en el paso 2. iniciamos tres variables locales:
+    var 1) Guardamos del documento index.html, el input email.
+    var 2) Guardamos del documento index.html, el input password.
+    var 3) Definimos un booleano (llamado "camposCompletos") que usaremos para la validación de las condicionales iniciándolo como true.
+4. Condicionales (2 if):
+    if 1) Evaluamos dos condiciones.
+        condic) El valor en el input email ("var 1") es vacío o el valor del input password ("var 2") es vacío.
+            Si sucede esto:
+                La variable "var 3" cambia su valor a false lo que impedirá que entre en la segunda condicional.
+                Invocamos una alerta pidiendo que se completen los campos.
+
+    Si las condiciones de "if 1" no se cumplen, saltamos al "if 2".
+    
+    if 2) Evaluamos la condición almacenada en "var 3".
+        condic) "var 3" mantiene su valor true (los campos están completos).
+            Si sucede esto:
+                Seteamos en el LocalStorage(parámetro1, parámetro2) un Item bajo un nombre asignado (parámetro1) y un objeto convertido a JSON con JSON.stringify() (parámetro2) que tendrá el valor guardado bajo el nombre asignado en el primer parámetro (parámetro1). Este será un usuario loggeado.
+                Redirigimos con window.location a la página objetivo (cover.html).
+
+
+INVOCACIONES: DOMContentLoaded + click
+
+NOTA: lo ejecutado por "if 2" será usado en las funciones I.1 e I.2 en el archivo INIT.JS
+--------------------------------------------------
+==================================================
+
+---------------INIT-----------------
+FUNCIÓN I.1
+-Función Usuario y desloggeo.
+[Función que muestra (en caso de usuario loggeado) el usuario loggeado y la opción de desloggeo]
+
+1. Creamos una función anónima que se ejecuta al cargarse el HTML.
+2. Creamos 3 variables locales dentro de la función.
+    var 1) En esta variable guardamos al Item que tenemos en Local Storage (ver LOGIN 4.if 2).
+    var 2) Guardamos el objeto (un div) de los documentos HTML correspondientes que va a contener un párrafo que será el traído en la "var 3".
+    var 3) Traemos el párrafo que está dentro del div llamado en la "var 2".
+3. Condicional (1 if):
+    if 1) Evalúa una condición.
+        condic) Hay un usuario loggeado ("var 1" es true).
+            Si sucede esto:
+                El objeto JSON que tenemos guardado en "var 1" lo transformamos a notación JS para poder trabajar con él con la función JSON.parse().
+                Al párrafo guardado en "var 3" le asignamos el texto que mostrará la información del usuario loggeado (la información que traemos en "var 1").
+                El div que guardamos en "var 2" está iniciado en los HTML con un estilo de "display:none". Le cambiamos el estilo para que se muestre la información que traemos de "var 1" y ya inyectada en el párrafo traído en "var 3". Le asignamos estilo "display:inline-block".
+
+    Si la condicional no se cumple no se ejecuta "if 1" porque no hay ningún usuario loggeado para mostrar por lo que tampoco se accederá al disparador de la función Log-out.
+
+4. Función Log-out.
+
+
+INVOCACIONES: DOMContentLoaded
+
+NOTA: Hace uso de la función L.1 descrita en LOGIN.
+--------------------------------------------------
+FUNCIÓN I.2
+-Función Log-out.
+[Función que nos permitirá finalizar la sesión desloggeando al usuario]
+
+1. Al elemento (botón) traído de los documentos HTML correspondientes le asignamos un evento de click que ejecutará la siguiente función.
+2. Tomamos el LocalStorage y le removemos el ítem que habíamos guardado en el punto 4 de Login (ver LOGIN 4.if 2).
+3. Redirigimos con window.location a la página objetivo (en este caso, al login).
+
+
+INVOCACIONES: click
+
+NOTA: Se ejecuta dentro de la función I.1 como punto 4 de esa función.
+--------------------------------------------------
+==================================================
+
+---------------PRODUCTOS-----------------
+VARIABLES GLOBALES (VGP)
+c->Const
+v->Var
+    c1) Guarda un criterio, Orden de precio ascendente.
+    c2) Guarda un criterio, Orden de precio descendente.
+    c3) Guarda un criterio, Orden por relevancia.
+    v1) Guarda un array vacío. (productArray)
+    v2) Guarda una variable indefinida. (minPrice)
+    v3) Guarda una variable indefinida. (maxPrice)
+
+    RAZONES (Lugares de uso):
+        c1) Nos da una idea de cómo es el rasgo del criterio que vamos a usar bajo ese nombre en la Función Sort (ver P.1, P.2)
+        c2) Nos da una idea de cómo es el rasgo del criterio que vamos a usar bajo ese nombre en la Función Sort (ver P.1, P.2)
+        c3) Nos da una idea de cómo es el rasgo del criterio que vamos a usar bajo ese nombre en la Función Sort (ver P.1, P.2)
+        v1) Array vacío que almacenará los productos traídos desde un JSON que podemos encontrar en el archivo Init.js por la función Productos Desde JSON (ver P.2, P.3, P.5, P.6, P.7)
+        v2) Es una variable iniciada como indefinida que almacenará posibles valores para establecer el precio mínimo en un filtro por precio (ver P.4, P.6, P.7)
+        v3) Es una variable iniciada como indefinida que almacenará posibles valores para establecer el precio máximo en un filtro por precio(ver P.4, P.6, P.7)
+
+--------------------------------------------------
+FUNCIÓN P.1
+-Función Sort. { sortProducts }
+[Funcion que nos permite reordenar los elementos que almacenamos en el array "v1" (ver VGP) de acuerdo a un criterio determinado ("c1", "c2" o "c3" (ver VGP))]
+
+1. Creamos una función que llamamos sortProducts que recibe dos parámetros. El primer parámetro va a ser un criterio y el segundo un array.
+2. Creamos una variable local:
+    var 1) Será un array vació guardado bajo el nombre de "result". Aquí se guardará el resultado del método Sort del array según cada criterio (c1, c2 o c3 (ver VGP)).
+3. Condicionales (1 if, 2 else if):
+    if 1) Evalúa criterios.
+        condic) Se evalúa por idéntico el criterio en base a "c1".
+            Si sucede esto:
+                Se ordenaran los pares de valores (los parámetros a y b del método Sort) en función de su valor de precio bajo el criterio (c1) de valor ascendente y guarda el nuevo orden en la variable "var 1".
+    else if 2) Evalúa criterios.
+        condic) Se evalúa por idéntico el criterio en base a "c2".
+            Si sucede esto:
+                Se ordenaran los pares de valores (los parámetros a y b del método Sort) en función de su valor de precio bajo el criterio (c2) de valor descendente y guarda el nuevo orden en la variable "var 1".
+    else if 3) Evalúa criterios.
+        condic) Se evalúa por idéntico el criterio en base a "c3".
+            Si esto sucede:
+                Se ordenaran los pares de valores (los parámetros a y b del método Sort) en función de su valor de relevancia bajo el criterio (c3) de valor descendente y guarda el nuevo orden en la variable "var 1".
+4. La función nos devolverá lo correspondientemente guardado en "var 1" después de evaluados los criterios.
+
+
+INVOCACIONES: P.2.1, P.2.2, P.2.3
+
+--------------------------------------------------
+FUNCIÓN P.2
+-Ejecuciones del Sort.
+[La ejecución de una de estas funciones nos permitirá visualizar los productos mostrados por la función showProducts (ver P.4) de acuerdo a uno de los siguientes tres criterios]
+
+P.2.1 -> Ordenamiento por precio ascendente
+    
+    1. Llamamos del documento Products.html el botón con ID "price-asc" y le asignamos un evento de click que ejecuta la siguiente función.
+    2. En el array productArray ("v1" (ver VGP)) almacenamos un nuevo array que será el resultado de la Función Sort (ver P.1) llamada sortProducts en función de los siguientes dos parámetros. El primero es el criterio, que en este caso será "c1" (ver VGP), y el segundo será el array del que hará uso la Función Sort (P.1).
+    3. Mostramos los productos con la Función showProducts (ver P.4) que recibirá como parámetro el array ordenado por la Función Sort (P.1).
+
+P.2.2 -> Ordenamiento por precio descendente
+
+    1. Llamamos del documento Products.html el botón con ID "price-desc" y le asignamos un evento de click que ejecuta la siguiente función.
+    2. En el array productArray ("v1" (ver VGP)) almacenamos un nuevo array que será el resultado de la Función Sort (ver P.1) llamada sortProducts en función de los siguientes dos parámetros. El primero es el criterio, que en este caso será "c2" (ver VGP), y el segundo será el array del que hará uso la Función Sort (P.1).
+    3. Mostramos los productos con la Función showProducts (ver P.4) que recibirá como parámetro el array ordenado por la Función Sort (P.1).
+
+P.2.3 -> Ordenamiento por relevancia de forma descendente
+
+    1. Llamamos del documento Products.html el botón con ID "relevancia" y le asignamos un evento de click que ejecuta la siguiente función.
+    2. En el array productArray ("v1" (ver VGP)) almacenamos un nuevo array que será el resultado de la Función Sort (ver P.1) llamada sortProducts en función de los siguientes dos parámetros. El primero es el criterio, que en este caso será "c3" (ver VGP), y el segundo será el array del que hará uso la Función Sort (P.1).
+    3. Mostramos los productos con la Función showProducts (ver P.4) que recibirá como parámetro el array ordenado por la Función Sort (P.1).
+
+
+INVOCACIONES: click
+
+--------------------------------------------------
+FUNCIÓN P.3
+-Función Slides. { changeImg }
+[Función que nos permite generar un Slideshow que se muestra en la página Productos]
+
+1. Declaramos una variable global, bajo el nombre "c" y valor 0, que será nuestro contador.
+2. Declaramos una variable global, bajo el nombre "time" y valor 2500 (2,5 segundos), que será el tiempo de transición.
+3. Creamos la Función changeImg().
+4. Dentro de changeImg() creamos dos variables.
+    var 1) Bajo el nombre "reference" almacenamos el elemento (<a>) del documento Products.html que contiene el ID "reference-img".
+    var 2) Bajo el nombre "slideTitle" almacenamos el elemento (<h4>) del documento Products.html que contiene el ID "slide-title".
+5. Inyectamos en el elemento (<h4>) guardado en "var 2" el nombre del producto de índice "c" del array "v1".
+6. Le indicamos al elemento (<img>) de nombre "slide" que se encuentra en Products.html que busque el source de la imagen en el array "v1".
+7. Al elemento (<a>) guardado en "var 1" le asignamos el atributo href con el valor correspondiente al ID con número "c" dado por el contador.
+8. Aumentamos el contador "c" en una unidad.
+9. Condicional (1 if):
+    if 1) Evalúa una condición.
+        condic) El valor del contador "c" es mayor a la longitud del array - 1 (es decir, "c" es mayor que el objeto de mayor índice en el array).
+            Si sucede esto:
+                Seteamos el contador "c" a cero nuevamente para que inicie el ciclo otra vez.
+10. Llamamos a la función setTimeOut con los parámetros changeImg y la variable del paso 2 ("time") que será la que indique el tiempo que tomará ejecutar la función changeImg.
+
+
+INVOCACIONES: P.4
+
+--------------------------------------------------
+FUNCIÓN P.4
+-Función Maqueta Productos. { showProducts }
+[Función que usamos para mostrar los productos en la página de Productos]
+
+1. Creamos la función showProducts que recibe por parámetro un array.
+2. Declaramos una variable local llamada "contenido" que iniciaremos como un string vacío.
+3. Hacemos un loop con el método for para recorrer los elementos del array.
+4. Creamos una variable local de nombre "productList" que guardará en cada iteración del loop del paso 3 el elemento del array con el índice "i" declarado en el for loop.
+4. Condicional (1 if):
+    if 1) Evalúa dos grupos de condiciones.
+        Grupo 1) Para los valores mínimos
+            condic) "v2" (precio mínimo) es indefinido (el usuario no ingresó valores) o "v2" (precio mínimo) no es vacío y el valor numérico del costo del Producto guardado en la variable local "productList" (paso 4) es mayor o igual a "v2" (precio mínimo).
+        Grupo 2) Para los valores máximos
+            condic) "v3" (precio máximo) es indefinido (el usuario no ingresó valores) o "v3" (precio máximo) no es vacío y el valor numérico del costo del Producto guardado en la variable local "productList" (paso 4) es menor o igual a "v3" (precio máximo).
+        CONJUNTO CONDICIONAL)
+            En base a Grupo 1 (que nos da las condiciones para valor mínimo) y Grupo 2 (que nos dá las conidiciones para los valores máximos) evaluamos una condición del tipo &&. Tiene que suceder lo evaluado en Grupo 1 y en Grupo 2.
+
+                Si sucede esto:
+                    Se procede a guardar en la variable "contendio" (declarada en el paso 2) la estructura o maqueta de lo que se inyectará en "Products.html" para mostrar los productos guardados en el array "v1" (productArray).
+
+5. Llamamos del documento "Products.html" el elemento div de ID "product-list" y con el método innerHTML le inyectamos los guardados en la variable local "contenido" (declarada en paso 2 y modificada en el paso 4).
+6. Ejecutamos la Función Slides (ver P.3)
+
+
+INVOCACIONES: P.2.1, P.2.2, P.2.3, P.5, P.6, P.7
+
+--------------------------------------------------
+FUNCIÓN P.5
+-Función Productos Desde JSON
+[Función que guarda en un array el contenido traído desde un JSON dado]
+
+1. Creamos una función anónima que se ejecuta al cargarse el HTML.
+2. Invocamos una función declarada en INIT.JS almacenada bajo el nombre "getJSONData"y le pasamos por parámetro la URL que contiene en formato JSON los datos de los que haremos uso. Recibida una respuesta de código 2xx o 3xx se ejecutará la siguiente función.
+3. Condicional (1 if):
+    if 1) Evalúa una condición.
+        condic) El estatus de respuesta recibido es idéntico a "ok".
+            Si esto sucede:
+                Se guarda en "v1" (productArray) los datos extraídos del JSON transformados previamente a notación JS por la función "getJSONData".
+                Invocamos la Función showProducts (ver P.4) que contiene la estructura para mostrar el listado de productos traídos por su parámetro que será el array "v1" (productArray).
+
+
+INVOCACIONES: DOMContentLoaded + promesa
+
+--------------------------------------------------
+FUNCIÓN P.6
+-Función Filtrar
+[Función que filtra productos de acuerdo a los valores dados para precio mínimo y precio máximo]
+
+1. Llamamos del documento "Products.html" al elemento botón con ID "filtrar" que al hacer click ejecutará la siguiente función.
+2. Almacenamos en la variable global "v2" (minPrice)(ver VGP) el valor del elemento input de ID "min" del documento "Products.html".
+3. Almacenamos en la variable global "v3" (maxPrice)(ver VGP) el valor del elemento input de ID "max" del documento "Products.html".
+4. Condicional (2 if 2 else):
+    if 1) Evalúa tres condiciones.
+        condic) El valor de "v2" no es indefinido y el valor de "v2" no es vacío y el valor numérico de "v2" es mayor o igual a cero.
+            Si sucede esto:
+                Se le asigna a "v2" (minPrice) el valor numérico ingresado.
+            Else:
+                "v2" (minPrice) es indefinido.
+        condic) El valor de "v3" no es indefinido y el valor de "v3" no es vacío y el valor numérico de "v3" es mayor o igual a cero.
+            Si sucede esto:
+                Se le asigna a "v3" (maxPrice) el valor numérico ingresado.
+            Else:
+                "v3" (maxPrice) es indefinido.
+5. Invocamos la Función showProducts (ver P.4)
+
+
+INVOCACIONES: click
+
+--------------------------------------------------
+FUNCIÓN P.7
+-Función Limpiar
+[Función que elimina el filtro generado por la Función Filtrar (ver P.6)]
+
+1. Llamamos del documento "Products.html" al elemento botón con ID "limpiar" que al hacer click ejecutará la siguiente función.
+2. Seteamos el valor del elemento input con ID "min" del documento "Products.html" a vacío.
+3. Seteamos el valor del elemento input con ID "max" del documento "Products.html" a vacío.
+4. Seteamos "v2" (minPrice) a indefinido.
+5. Seteamos a "v3" (maxPrice) a indefinido.
+6. Invocamos la Función showProducts (ver P.4)
+
+
+INVOCACIONES: click
