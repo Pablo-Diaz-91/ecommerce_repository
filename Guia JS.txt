@@ -42,7 +42,7 @@ FUNCIÓN L.1
                 Redirigimos con window.location a la página objetivo (cover.html).
 
 
-INVOCACIONES: DOMContentLoaded + click
+INVOCADO EN: DOMContentLoaded + click
 
 NOTA: lo ejecutado por "if 2" será usado en las funciones I.1 e I.2 en el archivo INIT.JS
 --------------------------------------------------
@@ -71,7 +71,7 @@ FUNCIÓN I.1
 4. Función Log-out.
 
 
-INVOCACIONES: DOMContentLoaded
+INVOCADO EN: DOMContentLoaded
 
 NOTA: Hace uso de la función L.1 descrita en LOGIN.
 --------------------------------------------------
@@ -84,7 +84,7 @@ FUNCIÓN I.2
 3. Redirigimos con window.location a la página objetivo (en este caso, al login).
 
 
-INVOCACIONES: click
+INVOCADO EN: click
 
 NOTA: Se ejecuta dentro de la función I.1 como punto 4 de esa función.
 --------------------------------------------------
@@ -133,7 +133,7 @@ FUNCIÓN P.1
 4. La función nos devolverá lo correspondientemente guardado en "var 1" después de evaluados los criterios.
 
 
-INVOCACIONES: P.2.1, P.2.2, P.2.3
+INVOCADO EN: P.2.1, P.2.2, P.2.3
 
 --------------------------------------------------
 FUNCIÓN P.2
@@ -159,7 +159,7 @@ P.2.3 -> Ordenamiento por relevancia de forma descendente
     3. Mostramos los productos con la Función showProducts (ver P.4) que recibirá como parámetro el array ordenado por la Función Sort (P.1).
 
 
-INVOCACIONES: click
+INVOCADO EN: click
 
 --------------------------------------------------
 FUNCIÓN P.3
@@ -184,7 +184,7 @@ FUNCIÓN P.3
 10. Llamamos a la función setTimeOut con los parámetros changeImg y la variable del paso 2 ("time") que será la que indique el tiempo que tomará ejecutar la función changeImg.
 
 
-INVOCACIONES: P.4
+INVOCADO EN: P.4
 
 --------------------------------------------------
 FUNCIÓN P.4
@@ -211,7 +211,7 @@ FUNCIÓN P.4
 6. Ejecutamos la Función Slides (ver P.3)
 
 
-INVOCACIONES: P.2.1, P.2.2, P.2.3, P.5, P.6, P.7
+INVOCADO EN: P.2.1, P.2.2, P.2.3, P.5, P.6, P.7
 
 --------------------------------------------------
 FUNCIÓN P.5
@@ -228,7 +228,7 @@ FUNCIÓN P.5
                 Invocamos la Función showProducts (ver P.4) que contiene la estructura para mostrar el listado de productos traídos por su parámetro que será el array "v1" (productArray).
 
 
-INVOCACIONES: DOMContentLoaded + promesa
+INVOCADO EN: DOMContentLoaded + promesa
 
 --------------------------------------------------
 FUNCIÓN P.6
@@ -253,7 +253,7 @@ FUNCIÓN P.6
 5. Invocamos la Función showProducts (ver P.4)
 
 
-INVOCACIONES: click
+INVOCADO EN: click
 
 --------------------------------------------------
 FUNCIÓN P.7
@@ -268,4 +268,4 @@ FUNCIÓN P.7
 6. Invocamos la Función showProducts (ver P.4)
 
 
-INVOCACIONES: click
+INVOCADO EN: click
