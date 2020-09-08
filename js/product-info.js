@@ -27,16 +27,18 @@ function showProductDetails(products, comments) {
                         </div>
                     `;
     
-    /*for (let comment in comments) {
-        commentsDisplay = `
+    for (let comment in comments) {
+        commentsDisplay += `
                             <h5>${comments[comment].user}</h5>
+                            <small>${comments[comment].dateTime}</small>
+                            <p>Descripción: ${comments[comment].description}</p>
+                            <p>Puntuación: ${comments[comment].score}/5</p>
                         `;
                     }
-   */
 
 
     document.getElementById("details-container").innerHTML = productDetails;
-    //document.getElementById("comments").innerHTML = commentsDisplay;
+    document.getElementById("comments").innerHTML = commentsDisplay;
 }
 
 
