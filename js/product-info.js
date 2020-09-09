@@ -27,15 +27,24 @@ function showProductDetails(products, comments) {
                         </div>
                     `;
     
-    for (let comment in comments) {
+    comments.forEach(function (comment) {
+        let score = '';
         commentsDisplay += `
-                            <h5>${comments[comment].user}</h5>
-                            <small>${comments[comment].dateTime}</small>
-                            <p>Descripción: ${comments[comment].description}</p>
-                            <p>Puntuación: ${comments[comment].score}/5</p>
+                            <h5>${comment.user}</h5>
+                            <small>${comment.dateTime}</small>
+                            <p>Descripción: ${comment.description}</p>
                         `;
+
+                    for (let i = 1 ; i <= comment.score ; i++) {
+                        score += `<span class="fa fa-star checked"></span>`; 
                     }
 
+                    for (let i = comment.score + 1 ; i <= 5 ; i++) {
+                        score += `<span class="fa fa-star"></span>`;
+                    }
+
+                    commentsDisplay += `<div>${score}</div>`;
+                });
 
     document.getElementById("details-container").innerHTML = productDetails;
     document.getElementById("comments").innerHTML = commentsDisplay;
