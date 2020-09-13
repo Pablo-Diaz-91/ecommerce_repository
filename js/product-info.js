@@ -1,7 +1,7 @@
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
-productArray = [];
+productObject = {};
 commentArray = [];
 
 function showProductDetails(products, comments) {
@@ -12,27 +12,28 @@ function showProductDetails(products, comments) {
                         <h3>${products.name}</h3>
                         <div class="description">
                             <p>Descripción: ${products.description}</p>
-                            <p>Precio: ${products.currency} ${products.cost}
+                            <p><strong>Precio: ${products.currency} ${products.cost}</strong></p>
                         </div>
                         <div class="images">
-                            <img src="img/prod1.jpg" alt="Imagen del producto">
-                            <img src="img/prod1_1.jpg"
-                            alt="Imagen del producto" >
-                            <img src="img/prod1_2.jpg"
-                            alt="Imagen del producto" >
-                            <img src="img/prod1_3.jpg"
-                            alt="Imagen del producto" >
-                            <img src="img/prod1_4.jpg"
-                            alt="Imagen del producto" >
+                        <img src="${products.images[0]}" alt="Imagen del producto">
+                        <img src="${products.images[1]}"
+                        alt="Imagen del producto">
+                        <img src="${products.images[2]}"
+                        alt="Imagen del producto">
+                        <img src="${products.images[3]}"
+                        alt="Imagen del producto">
+                        <img src="${products.images[4]}"
+                        alt="Imagen del producto">
                         </div>
-                    `;
+                        `;
     
     comments.forEach(function (comment) {
         let score = '';
+                        
         commentsDisplay += `
                             <h5>${comment.user}</h5>
                             <small>${comment.dateTime}</small>
-                            <p>Descripción: ${comment.description}</p>
+                            <p>${comment.description}</p>
                         `;
 
                     for (let i = 1 ; i <= comment.score ; i++) {
@@ -43,7 +44,7 @@ function showProductDetails(products, comments) {
                         score += `<span class="fa fa-star"></span>`;
                     }
 
-                    commentsDisplay += `<div>${score}</div>`;
+                    commentsDisplay += `<div id="score-com">${score}</div><hr>`;
                 });
 
     document.getElementById("details-container").innerHTML = productDetails;
@@ -54,7 +55,7 @@ function showProductDetails(products, comments) {
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
-            productArray = resultObj.data;
+            productObject = resultObj.data;
         }
     });
 });
@@ -64,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         if (resultObj.status === "ok") {
             commentArray = resultObj.data;
 
-            showProductDetails(productArray, commentArray);
+            showProductDetails(productObject, commentArray);
         }
     })
 })
