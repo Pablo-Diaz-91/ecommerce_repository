@@ -119,7 +119,7 @@ function showProducts(array) {
 /* --- FIN FUNCIÓN MOSTRAR PRODUCTOS --- */
 
 
-/* --- FUNCIÓN PRODUCTOS DESDE JSON --- */
+/* --- FUNCIÓN TRAER DESDE JSON --- */
 document.addEventListener("DOMContentLoaded", function (e) {
     getJSONData(PRODUCTS_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         }
     })
 });
-/* --- FIN FUNCIÓN PRODUCTOS DESDE JSON --- */
+/* --- FIN FUNCIÓN TRAER DESDE JSON --- */
 
 
 /* --- FUNCIÓN FILTRAR --- */
