@@ -10,9 +10,15 @@
     P.2) Ejecuciones del Sort
     P.3) Función Slides
     P.4) Función Maqueta Productos
-    P.5) Función Productos Desde JSON
+        P.4.1) Función Load Product Info HTML
+    P.5) Función Traer Desde JSON
     P.6) Función Filtrar
     P.7) Función Limpiar
+4) PRODUCT-INFO:
+    Variables (VGPI)
+    PI.1) Función Detalles de Producto
+    PI.2) Función Traer desde JSON (product-info)
+    PI.3) Función Traer desde JSON
 
 ================================================
 ---------------LOGIN-----------------
@@ -105,7 +111,7 @@ v->Var
         c1) Nos da una idea de cómo es el rasgo del criterio que vamos a usar bajo ese nombre en la Función Sort (ver P.1, P.2)
         c2) Nos da una idea de cómo es el rasgo del criterio que vamos a usar bajo ese nombre en la Función Sort (ver P.1, P.2)
         c3) Nos da una idea de cómo es el rasgo del criterio que vamos a usar bajo ese nombre en la Función Sort (ver P.1, P.2)
-        v1) Array vacío que almacenará los productos traídos desde un JSON que podemos encontrar en el archivo Init.js por la función Productos Desde JSON (ver P.2, P.3, P.5, P.6, P.7)
+        v1) Array vacío que almacenará los productos traídos desde un JSON que podemos encontrar en el archivo Init.js por la Función Traer desde JSON (ver P.2, P.3, P.5, P.6, P.7)
         v2) Es una variable iniciada como indefinida que almacenará posibles valores para establecer el precio mínimo en un filtro por precio (ver P.4, P.6, P.7)
         v3) Es una variable iniciada como indefinida que almacenará posibles valores para establecer el precio máximo en un filtro por precio(ver P.4, P.6, P.7)
 
@@ -205,7 +211,7 @@ FUNCIÓN P.4
             En base a Grupo 1 (que nos da las condiciones para valor mínimo) y Grupo 2 (que nos dá las conidiciones para los valores máximos) evaluamos una condición del tipo &&. Tiene que suceder lo evaluado en Grupo 1 y en Grupo 2.
 
                 Si sucede esto:
-                    Se procede a guardar en la variable "contendio" (declarada en el paso 2) la estructura o maqueta de lo que se inyectará en "Products.html" para mostrar los productos guardados en el array "v1" (productArray).
+                    Se procede a guardar en la variable "contendio" (declarada en el paso 2) la estructura o maqueta de lo que se inyectará en "Products.html" para mostrar los productos guardados en el array "v1" (productArray). Hay un botón inyectado que ejecuta la función Load Product Info HTML (ver P.4.1).
 
 5. Llamamos del documento "Products.html" el elemento div de ID "product-list" y con el método innerHTML le inyectamos los guardados en la variable local "contenido" (declarada en paso 2 y modificada en el paso 4).
 6. Ejecutamos la Función Slides (ver P.3)
@@ -214,8 +220,18 @@ FUNCIÓN P.4
 INVOCADO EN: P.2.1, P.2.2, P.2.3, P.5, P.6, P.7
 
 --------------------------------------------------
+FUNCIÓN P.4.1
+-Función Load Product Info HTML. { productDetails }
+[Función que nos redirecciona al html Product-info.html]
+
+1. Con window.location, esta función ejecutada por un botón inyectado por la función Maqueta Productos (ver P.4) nos redirigimos a la página que nos muestra los detalles de los productos.
+
+
+INVOCADO EN: P.4
+
+--------------------------------------------------
 FUNCIÓN P.5
--Función Productos Desde JSON
+-Función Traer desde JSON
 [Función que guarda en un array el contenido traído desde un JSON dado]
 
 1. Creamos una función anónima que se ejecuta al cargarse el HTML.
@@ -269,3 +285,8 @@ FUNCIÓN P.7
 
 
 INVOCADO EN: click
+
+--------------------------------------------------
+==================================================
+
+---------------PRODUCT INFO-----------------
