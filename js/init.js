@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 
   if (userLogged) {
     userLogged = JSON.parse(userLogged);
-    user.innerText += 'Usuario: ' + userLogged.email;
+    user.innerText += userLogged.email;
     userInfo.style = 'display: flex';
   }
 
