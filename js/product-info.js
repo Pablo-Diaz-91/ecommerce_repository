@@ -58,13 +58,15 @@ function showRelatedProducts(products, related){
     related.forEach(function(i){
         content += `
                     <div class="relatedProd">
-                        <img class="imgRelated" src="${products[i].imgSrc}">
-                        <div class="relatedDescript">
-                            <h4>${products[i].name}</h4>
-                            <p>${products[i].description}</p>
-                            <p>Precio: ${products[i].currency} ${products[i].cost}</p>
-                            <p>Cantidad vendidos: ${products[i].soldCount}</p>
-                        </div>
+                        <a href="#">
+                            <img class="imgRelated" src="${products[i].imgSrc}">
+                            <div class="relatedDescript">
+                                <h4>${products[i].name}</h4>
+                                <p>${products[i].description}</p>
+                                <p>Precio: ${products[i].currency} ${products[i].cost}</p>
+                                <p>Cantidad vendidos: ${products[i].soldCount}</p>
+                            </div>
+                        </a>
                     </div>
                     
                 `;
