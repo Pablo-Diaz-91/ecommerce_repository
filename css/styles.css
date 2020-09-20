@@ -352,6 +352,12 @@ p.soldCount {
   border-radius: 5px;
 }
 
+.detailsPrice {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 2rem;
+}
+
 #comments {
   margin: 20px 102px;
   padding-top: 20px;
@@ -377,20 +383,25 @@ p.soldCount {
   margin: 20px;
 }
 
+#carouselExampleIndicators {
+  margin: 100px auto;
+  width: 900px;
+}
+
 /*----Prueba scrolls----*/
 
 ::-webkit-scrollbar {
-  width: 20px;
+  width: 15px;
 }
 
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey;
-  border-radius: 0px 0px 5px 5px;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: rgb(25, 228, 255);
-  border-radius: 0px 0px 5px 5px;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
