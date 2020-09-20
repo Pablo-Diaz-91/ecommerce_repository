@@ -13,18 +13,7 @@ function showProductDetails(products, comments) {
                         <h3>${products.name}</h3>
                         <div class="description">
                             <p>Descripción: ${products.description}</p>
-                            <p><strong>Precio: ${products.currency} ${products.cost}</strong></p>
-                        </div>
-                        <div class="images">
-                        <img src="${products.images[0]}" alt="Imagen del producto">
-                        <img src="${products.images[1]}"
-                        alt="Imagen del producto">
-                        <img src="${products.images[2]}"
-                        alt="Imagen del producto">
-                        <img src="${products.images[3]}"
-                        alt="Imagen del producto">
-                        <img src="${products.images[4]}"
-                        alt="Imagen del producto">
+                            <p class="detailsPrice"><strong>Precio: ${products.currency} ${products.cost}</strong></p>
                         </div>
                         `;
     
