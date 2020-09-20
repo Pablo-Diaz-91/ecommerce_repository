@@ -182,12 +182,6 @@ a.custom-card:hover {
   color: white;
 }
 
-#user {
-  margin-right: 20px;
-  padding: 8px 0 8px 0;
-}
-
-
 
 /*---PRODUCTOS---------------------------------------*/
 
@@ -431,6 +425,12 @@ p.soldCount {
   padding: 20px;
   border: 1px solid gray;
   background-color: lightgray;
+}
+
+.relatedProd a {
+  display: flex;
+  text-decoration: none;
+  color: black;
 }
 
 .imgRelated {
