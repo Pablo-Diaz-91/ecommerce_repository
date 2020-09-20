@@ -3,6 +3,7 @@
 //elementos HTML presentes.
 productObject = {};
 commentArray = [];
+productArray = [];
 
 function showProductDetails(products, comments) {
     let commentsDisplay = '';
@@ -52,6 +53,26 @@ function showProductDetails(products, comments) {
 }
 
 
+function showRelatedProducts(products, related){
+    let content = '';
+    related.forEach(function(i){
+        content += `
+                    <div class="relatedProd">
+                        <img class="imgRelated" src="${products[i].imgSrc}">
+                        <div class="relatedDescript">
+                            <h4>${products[i].name}</h4>
+                            <p>${products[i].description}</p>
+                            <p>Precio: ${products[i].currency} ${products[i].cost}</p>
+                            <p>Cantidad vendidos: ${products[i].soldCount}</p>
+                        </div>
+                    </div>
+                    
+                `;
+
+        document.getElementById('related').innerHTML = content;
+    })
+}
+
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
@@ -67,5 +88,15 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
             showProductDetails(productObject, commentArray);
         }
-    })
-})
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function (e) {
+    getJSONData(PRODUCTS_URL).then(function (resultObj) {
+        if (resultObj.status === "ok") {
+            productArray = resultObj.data;
+
+            showRelatedProducts(productArray, productObject.relatedProducts);
+        }
+    });
+});
