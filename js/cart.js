@@ -39,7 +39,7 @@ function showCartContent(array) {
                         
                         <td> <span class="subtotal" id="productsSubtotal${i}">${sub + " " + productsCart.currency}</span> </td>
                         
-                        <td> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> </td>
+                        <td> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="fas fa-trash"></span></button> </td>
                     </tr>
                 
         `
