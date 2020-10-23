@@ -33,6 +33,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link href="css/dropzone.css" rel="stylesheet">
+  
 </head>
 
 <body>
@@ -82,22 +83,110 @@
         </tfoot>
       </table>
 
-      <!--Inputs-->
-      <label for="premium">
-        <input type="radio" name="send-type" id="premium" value="10" required checked>
-        Envío premium
-      </label>
-      <br>
-      <label for="standard">
-        <input type="radio" name="send-type" id="standard" value="5" required>
-        Envío estándar
-      </label>
-      <br>
-      <label for="economic">
-        <input type="radio" name="send-type" id="economic" value="2" required>
-        Envío económico
-      </label>
-      <br>
+      <!-----------Tipos de envío----------->
+      <h2>Tipo de envío</h2>
+      <div class="my-3">
+        <label for="premium">
+          <input type="radio" name="send-type" id="premium" value="1" required checked>
+          Envío premium
+        </label>
+        <br>
+        <label for="standard">
+          <input type="radio" name="send-type" id="express" value="2" required>
+          Envío express
+        </label>
+        <br>
+        <label for="economic">
+          <input type="radio" name="send-type" id="standard" value="3" required>
+          Envío standard
+        </label>
+        <br>
+      </div>
+      <!---------------------------------->
+
+      <!----------Datos de envío---------->
+      <form>
+        <h2>Datos de envío</h2>
+        <div class="form-group mb-4">
+          <label for="country">País</label>
+          <select name="country" id="country" class="form-control">
+            <option>Uruguay</option>
+            <option>Brasil</option>
+            <option>Argentina</option>
+            <option>Paraguay</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="adress-street" placeholder="Calle" required><br>
+          <input type="text" class="form-control" id="adress-number" placeholder="Número de puerta" required><br>
+          <input type="text" class="form-control" id="adress-intersection" placeholder="Esquina" required><br>
+        </div>
+
+        <!-- Button trigger modal -->
+        <div class="text-center mb-4">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Seleccionar método de pago
+          </button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Métodos de compra</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <label for="credit-card">
+                  <input type="radio" name="pay-method" id="credit-card" checked>
+                  Tarjeta de crédito
+                </label><br>
+                <label for="transfer">
+                  <input type="radio" name="pay-method" id="transfer">
+                  Transferencia
+                </label>
+                <!--Tarjeta de crédito-->
+                <div class="form-group">
+                  <input type="text" class="form-control"  placeholder="N° de Tarjeta">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control"  placeholder="Nombre del titular">
+                </div>
+                <div class="form-group">
+                  <input type="date" class="form-control" placeholder="Vencimiento">
+                </div>
+                <div class="form-group">
+                  <input type="number" class="form-control"  placeholder="Código">
+                </div>
+                <!--Transferencia bancaria-->
+                  <!--Contenido para Transferencia. Empieza como d-none y cambia de clase si se selecciona-->
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Comprar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--------------------------------------->
+
+
+        <div class="text-center">
+          <!--Contenedor de calculo total con el envío-->
+          <h2>Total con envío:</h2>
+          <div id="total-delivery">
+
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Comprar</button>
+        </div>
+      </form>
 
   </div>
 
