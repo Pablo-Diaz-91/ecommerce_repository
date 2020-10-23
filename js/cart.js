@@ -50,7 +50,7 @@ function showCartContent(array) {
 }
 
 document.addEventListener("DOMContentLoaded", function (e) {
-    getJSONData(CART_INFO_URL).then(function (resultObj) {
+    getJSONData(CART_CHALLENGE).then(function (resultObj) {
         if (resultObj.status === "ok") {
             cartContent = resultObj.data;
             showCartContent(cartContent.articles);
