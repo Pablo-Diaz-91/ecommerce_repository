@@ -87,17 +87,17 @@
       <h2>Tipo de envío</h2>
       <div class="my-3">
         <label for="premium">
-          <input type="radio" name="send-type" id="premium" value="1" required checked>
+          <input type="radio" name="send-type" id="premium" value="15" required checked>
           Envío premium
         </label>
         <br>
-        <label for="standard">
-          <input type="radio" name="send-type" id="express" value="2" required>
+        <label for="express">
+          <input type="radio" name="send-type" id="express" value="7" required>
           Envío express
         </label>
         <br>
-        <label for="economic">
-          <input type="radio" name="send-type" id="standard" value="3" required>
+        <label for="standard">
+          <input type="radio" name="send-type" id="standard" value="5" required>
           Envío standard
         </label>
         <br>
@@ -105,7 +105,7 @@
       <!---------------------------------->
 
       <!----------Datos de envío---------->
-      <form>
+      <form class="needs-validation" novalidate>
         <h2>Datos de envío</h2>
         <div class="form-group mb-4">
           <label for="country">País</label>
@@ -117,9 +117,18 @@
           </select>
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" id="adress-street" placeholder="Calle" required><br>
-          <input type="text" class="form-control" id="adress-number" placeholder="Número de puerta" required><br>
-          <input type="text" class="form-control" id="adress-intersection" placeholder="Esquina" required><br>
+          <input type="text" class="form-control" id="adress-street" placeholder="Calle" required>
+          <div class="invalid-feedback">
+            Ingrese nombre de calle
+          </div><br>
+          <input type="text" class="form-control" id="adress-number" placeholder="Número de puerta" required>
+          <div class="invalid-feedback">
+            Ingrese número de puerta
+          </div><br>
+          <input type="text" class="form-control" id="adress-intersection" placeholder="Esquina" required>
+          <div class="invalid-feedback">
+            Ingrese intersección
+          </div><br>
         </div>
 
         <!-- Button trigger modal -->
@@ -139,35 +148,48 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
+              
               <div class="modal-body">
-                <label for="credit-card">
-                  <input type="radio" name="pay-method" id="credit-card" checked>
-                  Tarjeta de crédito
-                </label><br>
-                <label for="transfer">
-                  <input type="radio" name="pay-method" id="transfer">
-                  Transferencia
-                </label>
-                <!--Tarjeta de crédito-->
+                
                 <div class="form-group">
-                  <input type="text" class="form-control"  placeholder="N° de Tarjeta">
+                  <select class="form-control" id="pay-method">
+                    <option id="credit-card" value="credit-card" >Tarjeta de crédito</option>
+                    <option id="transfer" value="transfer">Transferencia</option>
+                  </select>
                 </div>
-                <div class="form-group">
-                  <input type="text" class="form-control"  placeholder="Nombre del titular">
+                
+                <div id="paying-method-container">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="N° de Tarjeta" required>
+                    <div class="invalid-feedback">
+                      Ingrese número de tarjeta
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Nombre del titular" required>
+                    <div class="invalid-feedback">
+                      Ingrese nombre del titular
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <input type="date" class="form-control" placeholder="Vencimiento" required>
+                    <div class="invalid-feedback">
+                      Ingrese fecha de vencimiento
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Código" required>
+                    <div class="invalid-feedback">
+                      Ingrese código de seguridad
+                    </div>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <input type="date" class="form-control" placeholder="Vencimiento">
-                </div>
-                <div class="form-group">
-                  <input type="number" class="form-control"  placeholder="Código">
-                </div>
-                <!--Transferencia bancaria-->
-                  <!--Contenido para Transferencia. Empieza como d-none y cambia de clase si se selecciona-->
+
               </div>
 
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Comprar</button>
+                <button type="button" class="btn btn-primary">Listo</button>
               </div>
             </div>
           </div>
@@ -202,6 +224,28 @@
   </div>
 
   <!--SCRIPTS-->
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/dropzone.js"></script>
