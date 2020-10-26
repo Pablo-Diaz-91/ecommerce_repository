@@ -61,7 +61,7 @@
 
 
   <!--CONTENT-->
-  <div class="container p-5">
+  <div class="container p-5" id="cart-container">
       <table class="table">
         <thead class="thead-dark">
           <tr>
@@ -133,9 +133,13 @@
 
         <!-- Button trigger modal -->
         <div class="text-center mb-4">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          <button id="modal-button" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Seleccionar método de pago
           </button>
+        </div>
+        
+        <div id="check-modal">
+
         </div>
 
         <!-- Modal -->
@@ -160,25 +164,25 @@
                 
                 <div id="paying-method-container">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="N° de Tarjeta" required>
+                    <input id="credit-card-num" type="text" class="form-control" placeholder="N° de Tarjeta" required>
                     <div class="invalid-feedback">
                       Ingrese número de tarjeta
                     </div>
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Nombre del titular" required>
+                    <input id="card-name" type="text" class="form-control" placeholder="Nombre del titular" required>
                     <div class="invalid-feedback">
                       Ingrese nombre del titular
                     </div>
                   </div>
                   <div class="form-group">
-                    <input type="date" class="form-control" placeholder="Vencimiento" required>
+                    <input id="card-exp" type="text" class="form-control" pattern="[0-9]{2}/[0-9]{2}" placeholder="Vencimiento (MM/YY)" required>
                     <div class="invalid-feedback">
                       Ingrese fecha de vencimiento
                     </div>
                   </div>
                   <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Código" required>
+                    <input id="card-code" type="password" class="form-control" placeholder="Código" required>
                     <div class="invalid-feedback">
                       Ingrese código de seguridad
                     </div>
@@ -188,28 +192,26 @@
               </div>
 
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Listo</button>
+                <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Listo</button>
               </div>
             </div>
           </div>
         </div>
         <!--------------------------------------->
-
-
+        
         <div class="text-center">
           <!--Contenedor de calculo total con el envío-->
           <h2>Total con envío:</h2>
           <div id="total-delivery">
-
+            
           </div>
         </div>
-
-        <div class="text-center">
+        
+        <div class="text-center mt-4">
           <button type="submit" class="btn btn-primary">Comprar</button>
         </div>
       </form>
-
+      
   </div>
 
 
@@ -224,28 +226,8 @@
   </div>
 
   <!--SCRIPTS-->
-  <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function () {
-      'use strict';
-      window.addEventListener('load', function () {
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.getElementsByClassName('needs-validation');
-        // Loop over them and prevent submission
-        var validation = Array.prototype.filter.call(forms, function (form) {
-          form.addEventListener('submit', function (event) {
-            if (form.checkValidity() === false) {
-              event.preventDefault();
-              event.stopPropagation();
-
-            }
-            form.classList.add('was-validated');
-          }, false);
-        });
-      }, false);
-    })();
-  </script>
-
+  <script src="js/Templates/cart-template.js"></script>
+  <script src="js/Templates/payingModal.js"></script>
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/dropzone.js"></script>
