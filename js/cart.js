@@ -44,23 +44,8 @@ function showCartContent(array) {
 
         let sub = priceOnPesos * productsCart.count;
 
-        content += `
-            
-                    <tr>
-                        <th scope="row"><img src="${productsCart.src}" alt="Imagen del producto" width="30px"></th>
-                        
-                        <td>${productsCart.name}</td>
-                        
-                        <td>${priceOnPesos + " " + currencyOnPesos}</td>
-                        
-                        <td><input id="amount${i}" type="number" value=${productsCart.count} min="1" style="width:4em;" onchange="calcSubtotal(${priceOnPesos}, ${i})"></td>
-                        
-                        <td> <span class="subtotal" id="productsSubtotal${i}">${sub + " " + currencyOnPesos}</span> </td>
-                        
-                        <td> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="fas fa-trash"></span></button> </td>
-                    </tr>
-                
-        `
+        content += cartContentHTML(priceOnPesos, currencyOnPesos, productsCart, sub, i);
+        //ver función en js/Templates/cart-template
 
         document.getElementById("cart-table").innerHTML = content;
     }
@@ -97,6 +82,40 @@ for (let i = 0 ; i < sendTypesRadio.length ; i++){
     });
 }
 
+function validatePayment(){
+    //Función que chequea los campos del modal
+    //method
+    let payMethod = document.getElementById('pay-method').value;
+    //boolean
+    let validPayment = true;
+
+    if (payMethod == "credit-card"){
+        //Validación para tarjeta de crédito
+        let creditCard = document.getElementById('credit-card-num').value;
+        let cardName = document.getElementById('card-name').value;
+        let cardExp = document.getElementById('card-exp').value;
+        let cardCode = document.getElementById('card-code').value;
+
+        if (creditCard == "" || cardName == "" || cardExp == "" || cardCode == ""){
+            validPayment = false;
+        } else {
+            validPayment = true;
+        }
+
+    } else if (payMethod == "transfer"){
+        //Validación para transferencia
+        let acountName = document.getElementById('acount-name').value;
+        let acountNumber = document.getElementById('acount-number').value;
+        
+        if (acountName == "" || acountNumber == ""){
+            validPayment = false;
+        } else {
+            validPayment = true;
+        }
+    }
+    return validPayment;
+};
+
 document.addEventListener("DOMContentLoaded", function (e) {
     getJSONData(CART_CHALLENGE).then(function (resultObj) {
         if (resultObj.status === "ok") {
@@ -107,64 +126,74 @@ document.addEventListener("DOMContentLoaded", function (e) {
     })
 });
 
+
 document.getElementById('pay-method').addEventListener('change', function(){
     let payingMethod = document.getElementById('pay-method').value;
     let containerPayMethod = document.getElementById('paying-method-container');
 
     if (payingMethod == 'transfer'){
-        containerPayMethod.innerHTML = `
-            <div id="transfer-method">
-                <div class="form-group">
-                    <select class="form-control">
-                        <option>BROU</option>
-                        <option>BBVA</option>
-                        <option>Scotiabanck</option>
-                        <option>Santender</option>
-                        <option>HSBC</option>
-                        <option>BCU</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Nombre del titular de la cuenta" required>
-                    <div class="invalid-feedback">
-                        Ingrese nombre del titular
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Número de cuenta" required>
-                    <div class="invalid-feedback">
-                        Ingrese número de cuenta
-                    </div>
-                </div>
-            </div>
-        `;
+        containerPayMethod.innerHTML = payingModalTransfer();
+
     } else if (payingMethod == 'credit-card'){
-        containerPayMethod.innerHTML = `
-            <div class="form-group">
-                    <input type="text" class="form-control"  placeholder="N° de Tarjeta" required>
-                    <div class="invalid-feedback">
-                        Ingrese número de tarjeta
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control"  placeholder="Nombre del titular" required>
-                    <div class="invalid-feedback">
-                        Ingrese nombre del titular
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="date" class="form-control" placeholder="Vencimiento" required>
-                    <div class="invalid-feedback">
-                        Ingrese fecha de vencimiento
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control"  placeholder="Código" required>
-                    <div class="invalid-feedback">
-                        Ingrese código de seguridad
-                    </div>
-                </div>
-        `
+        containerPayMethod.innerHTML = payingModalCard();
     }
 
 });
+
+
+
+(function () {
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    'use strict';
+    window.addEventListener('load', function () {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        let forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        let validation = Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    if(validatePayment()){
+                        //Cambios de estilo cuando es válido
+                        document.getElementById('modal-button').classList.remove("btn-primary");
+                        document.getElementById('modal-button').classList.remove("btn-danger");
+                        document.getElementById('modal-button').classList.add("btn-success");
+                        document.getElementById("check-modal").innerHTML = validatePaymentSuccess();
+                    } else {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        //Cambios de estilo cuando es inválido
+                        document.getElementById('modal-button').classList.remove("btn-primary");
+                        document.getElementById('modal-button').classList.remove("btn-success");
+                        document.getElementById('modal-button').classList.add("btn-danger");
+                        document.getElementById("check-modal").innerHTML = invalidPayment();
+                    }
+                } else {
+                    //Si checkValidity es true
+                    if (validatePayment()){
+                        //Si ambas validaciones son correctas se muestra una alerta de confirmación
+                        document.getElementById('modal-button').classList.remove("btn-primary");
+                        document.getElementById('modal-button').classList.remove("btn-danger");
+                        document.getElementById('modal-button').classList.add("btn-success");
+                        document.getElementById("cart-container").innerHTML = validateBuyForm();
+                    } else {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        //Si el checkValidity es true pero el validatePayment es false se muestra una alerta que pide ingresar métodos de pago y se cambia la clase del botón de modal
+                        document.getElementById('modal-button').classList.remove("btn-primary");
+                        document.getElementById('modal-button').classList.remove("btn-success");
+                        document.getElementById('modal-button').classList.add("btn-danger");
+                        document.getElementById("check-modal").innerHTML = invalidPayment();
+                    }
+
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+})();
+
+function redirection(){
+    window.location = "cover.html";
+}
