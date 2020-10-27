@@ -11,7 +11,7 @@ function calcTotal(){
         //Suman al total cada uno de los valores dentro del elemento de nombre subtotal
         total += parseInt(sub[i].innerHTML);
     }
-    document.getElementById("total").innerHTML = total + " UYU";
+    document.getElementById("total").innerHTML = total + " " + currencyChanges();
     calcTotalDeliv();
 }
 
@@ -23,23 +23,43 @@ function calcSubtotal(price, i) {
     calcTotal();
 }
 
+function currencyChanges(){
+    let newCurrency;
+    let currency = document.getElementsByName('currency');
+    for (let i = 0 ; i < currency.length ; i++){
+        if (currency[i].checked) {
+            return newCurrency = currency[i].value;
+        }
+    }
+}
+
 function showCartContent(array) {
     let content = "";
     
     for(let i = 0; i < array.length; i++) {
         let productsCart = array[i];
-
         /*----conversion de moneda en base a currency dado----*/
+            let newCurrency = currencyChanges();
             let priceOnPesos;
             let currencyOnPesos;
 
-            if (productsCart.currency === "USD"){
+        if (newCurrency == "UYU"){
+            if (productsCart.currency == "USD"){
                 priceOnPesos = productsCart.unitCost * 40;
                 currencyOnPesos = "UYU";
             } else {
                 priceOnPesos = productsCart.unitCost;
                 currencyOnPesos = productsCart.currency;
             }
+        } else if (newCurrency == "USD"){
+            if (productsCart.currency == "UYU"){
+                priceOnPesos = productsCart.unitCost / 40;
+                currencyOnPesos = "USD";
+            } else {
+                priceOnPesos = productsCart.unitCost;
+                currencyOnPesos = productsCart.currency;
+            }
+        }
         /*--------------------*/
 
         let sub = priceOnPesos * productsCart.count;
@@ -50,6 +70,13 @@ function showCartContent(array) {
         document.getElementById("cart-table").innerHTML = content;
     }
     calcTotal();
+}
+
+let currencyRadios = document.getElementsByName('currency');
+for (let i = 0 ; i < currencyRadios.length ; i++){
+    currencyRadios[i].addEventListener('change', function(){
+        showCartContent(cartContent.articles);
+    });
 }
 
 function calcTotalDeliv() {
@@ -68,7 +95,7 @@ function calcTotalDeliv() {
     totalWDelivery = total + (total * (delivery / 100));
 
     let content = `
-        <h4>${totalWDelivery} UYU</h4>
+        <h4>${totalWDelivery + " " + currencyChanges()}</h4>
     `
 
     document.getElementById('total-delivery').innerHTML = content;
@@ -116,7 +143,7 @@ function validatePayment(){
     return validPayment;
 };
 
-document.addEventListener("DOMContentLoaded", function (e) {
+$(document).ready(function (e) {
     getJSONData(CART_CHALLENGE).then(function (resultObj) {
         if (resultObj.status === "ok") {
             cartContent = resultObj.data;
