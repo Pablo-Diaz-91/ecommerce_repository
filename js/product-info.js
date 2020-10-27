@@ -9,13 +9,7 @@ function showProductDetails(products, comments) {
     let commentsDisplay = '';
     let productDetails = '';
     
-    productDetails += `
-                        <h3>${products.name}</h3>
-                        <div class="description">
-                            <p>Descripción: ${products.description}</p>
-                            <p class="detailsPrice"><strong>Precio: ${products.currency} ${products.cost}</strong></p>
-                        </div>
-                        `;
+    productDetails += productDetailsTemp(products);
     
     comments.forEach(function (comment) {
         let score = '';
@@ -45,20 +39,7 @@ function showProductDetails(products, comments) {
 function showRelatedProducts(products, related){
     let content = '';
     related.forEach(function(i){
-        content += `
-                    <div class="relatedProd">
-                        <a href="#">
-                            <img class="imgRelated" src="${products[i].imgSrc}">
-                            <div class="relatedDescript">
-                                <h4>${products[i].name}</h4>
-                                <p>${products[i].description}</p>
-                                <p>Precio: ${products[i].currency} ${products[i].cost}</p>
-                                <p>Cantidad vendidos: ${products[i].soldCount}</p>
-                            </div>
-                        </a>
-                    </div>
-                    
-                `;
+        content += relatedProducts(products, i);
 
         document.getElementById('related').innerHTML = content;
     })
