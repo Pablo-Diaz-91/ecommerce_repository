@@ -19,7 +19,7 @@ function calcSubtotal(price, i) {
     //Función que calcula el subtotal en base a la cantidad de producto y el precio unitario
     let amount = parseInt(document.getElementById(`amount${i}`).value);
     subtotal = amount * price;
-    document.getElementById(`productsSubtotal${i}`).innerHTML = subtotal + " UYU";
+    document.getElementById(`productsSubtotal${i}`).innerHTML = subtotal + " " + currencyChanges();
     calcTotal();
 }
 
@@ -40,31 +40,31 @@ function showCartContent(array) {
         let productsCart = array[i];
         /*----conversion de moneda en base a currency dado----*/
             let newCurrency = currencyChanges();
-            let priceOnPesos;
-            let currencyOnPesos;
+            let newPrice;
+            let actualCurrency;
 
         if (newCurrency == "UYU"){
             if (productsCart.currency == "USD"){
-                priceOnPesos = productsCart.unitCost * 40;
-                currencyOnPesos = "UYU";
+                newPrice = productsCart.unitCost * 40;
+                actualCurrency = "UYU";
             } else {
-                priceOnPesos = productsCart.unitCost;
-                currencyOnPesos = productsCart.currency;
+                newPrice = productsCart.unitCost;
+                actualCurrency = productsCart.currency;
             }
         } else if (newCurrency == "USD"){
             if (productsCart.currency == "UYU"){
-                priceOnPesos = productsCart.unitCost / 40;
-                currencyOnPesos = "USD";
+                newPrice = productsCart.unitCost / 40;
+                actualCurrency = "USD";
             } else {
-                priceOnPesos = productsCart.unitCost;
-                currencyOnPesos = productsCart.currency;
+                newPrice = productsCart.unitCost;
+                actualCurrency = productsCart.currency;
             }
         }
         /*--------------------*/
 
-        let sub = priceOnPesos * productsCart.count;
+        let sub = newPrice * productsCart.count;
 
-        content += cartContentHTML(priceOnPesos, currencyOnPesos, productsCart, sub, i);
+        content += cartContentHTML(newPrice, actualCurrency, productsCart, sub, i);
         //ver función en js/Templates/cart-template
 
         document.getElementById("cart-table").innerHTML = content;
