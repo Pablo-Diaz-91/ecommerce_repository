@@ -45,7 +45,7 @@ function showRelatedProducts(products, related){
     })
 }
 
-document.addEventListener("DOMContentLoaded", function(e){
+$(document).ready(function(e){
     getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
             productObject = resultObj.data;
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 });
 
-document.addEventListener("DOMContentLoaded", function (e) {
+$(document).ready(function (e) {
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
             commentArray = resultObj.data;
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function (e) {
+$(document).ready(function (e) {
     getJSONData(PRODUCTS_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
             productArray = resultObj.data;

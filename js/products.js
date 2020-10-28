@@ -110,7 +110,7 @@ function showProducts(array) {
 
 
 /* --- FUNCIÓN TRAER DESDE JSON --- */
-document.addEventListener("DOMContentLoaded", function (e) {
+$(document).ready(function (e) {
     getJSONData(PRODUCTS_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
             productArray = resultObj.data;

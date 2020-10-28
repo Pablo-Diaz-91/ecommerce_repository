@@ -46,7 +46,7 @@ var getJSONData = function(url){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 //Función que guarda el usuario loggeado
-document.addEventListener("DOMContentLoaded", function(e){
+$(document).ready(function(e){
   let userLogged = localStorage.getItem('user-logged');
   let userInfo = document.getElementById('user-info');
   let user = document.getElementById('user');
