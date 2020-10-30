@@ -83,7 +83,9 @@ function calcTotalDeliv() {
     //Función que calcula el total con envío haciendo uso del valor total y agregando el valor calculado sobre los values del tipo de envío (15, 7, 5)
     let total = parseInt(document.getElementById('total').innerHTML);
     let delivery;
+    let deliveryCost;
     let sendType = document.getElementsByName('send-type');
+    let sendPrice = document.getElementById('send-price');
 
     for (let i = 0 ; i < sendType.length ; i++){
         //Iteramos para encontrar el radio con atributo checked para traer su valor para calcular
@@ -91,6 +93,14 @@ function calcTotalDeliv() {
             delivery = parseInt(sendType[i].value);
         }
     }
+
+    deliveryCost = total * (delivery / 100);
+
+    sendPrice.innerHTML = `<div class="text-center">
+                            <h2>Costo del envío</h2>
+                            <p>${deliveryCost.toFixed(2)} ${currencyChanges()}</p>
+                            </div>
+                        `;
 
     totalWDelivery = total + (total * (delivery / 100));
 
