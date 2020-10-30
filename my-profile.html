@@ -55,11 +55,49 @@
     </div>
   </nav>
   <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 7 (Fecha de entrega: 8/11/202020) -> Punto 1 y 2.</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+    <div class="row">
+      <div class="col-3 border text-center">
+        <img src="https://www.flaticon.com/svg/static/icons/svg/17/17004.svg" alt="Imagen de usuario" width="50%">
+      </div>
+      <div class="col-9 py-3 border">
+        <p>Nombre: </p>
+        <p>Apellido: </p>
+        <p>Fecha de Nacimiento: </p>
+        <p>E-mail: </p>
+        <p>Teléfono: </p>
+        <!-- Button trigger modal -->
+        <div class="text-center">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Editar Perfil
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar perfil</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <input class="form-control my-3" type="text" name="first-name" id="first-name" placeholder="Nombre">
+              <input class="form-control my-3" type="text" name="last-name" id="last-name" placeholder="Apellido">
+              <input class="form-control my-3" type="date" name="birthday" id="birthday">
+              <input class="form-control my-3" type="email" name="email" id="email" placeholder="Email">
+              <input class="form-control my-3" type="text" name="phone" id="phone" placeholder="Teléfono">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <footer class="text-muted bg-light">
