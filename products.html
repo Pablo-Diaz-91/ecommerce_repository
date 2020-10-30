@@ -53,15 +53,16 @@
         <a href="cover.html"><img class="img-break-img" src="img/cover_back.png" alt="eCommerce image"></a>
       </div>
 
-      <div class="container-filters-orders">
-        <div class="orders">
+      <!--Filtros-->
+      <div class="row container-filters-orders">
+        <div class="col-md-6 col-sm-12 orders">
           <p>Orden por precio o relevancia:</p>
           <button id="price-asc">Precio ascendente</button>
           <button id="price-desc">Precio descendente</button>
           <button id="relevancia">Relevancia</button>
         </div>
   
-        <div class="filtros-rangos">
+        <div class="col-md-6 col-sm-12 filtros-rangos">
           <p>Filtros por precio:</p>
           <input type="number" name="min" id="min" min="0" placeholder="Precio mínimo">
           <input type="number" name="max" id="max" placeholder="Precio máximo">
@@ -74,7 +75,7 @@
 
       <div class="container">
       <!-- PROYECTO JAP - LISTA -->
-        <div id="product-list">
+        <div class="row justify-content-around" id="product-list">
       
         </div>
 
