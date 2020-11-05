@@ -1,6 +1,6 @@
 function productShown(productList, i){
     return `
-        <div class="col-md-5">
+        <div class="col-lg-5">
 
             <div class="row my-3">
                 <div class="product-content my-auto">
