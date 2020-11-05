@@ -8,6 +8,17 @@ const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";
 const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";
 const CART_CHALLENGE = "https://japdevdep.github.io/ecommerce-api/cart/654.json"
 
+/*
+const CATEGORIES_URL = "http://localhost:3000/categories";
+const PUBLISH_PRODUCT_URL = "https://localhost:3000/publish_product";
+const CATEGORY_INFO_URL = "https://localhost:3000/category_info";
+const PRODUCTS_URL = "https://localhost:3000/products";
+const PRODUCT_INFO_URL = "https://localhost:3000/product_info";
+const PRODUCT_INFO_COMMENTS_URL = "https://localhost:3000/product_info_comments";
+const CART_INFO_URL = "https://localhost:3000/cart_info";
+const CART_BUY_URL = "https://localhost:3000/cart_buy";
+const CART_CHALLENGE = "https://localhost:3000/cart_challenge";
+*/
 
 var showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
