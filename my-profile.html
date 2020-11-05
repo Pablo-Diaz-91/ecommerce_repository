@@ -11,6 +11,8 @@
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
   <style>
     .bd-placeholder-img {
@@ -54,23 +56,38 @@
       
     </div>
   </nav>
-  <div class="container p-5">
+  <div class="container py-5" id="big-container">
     <div class="row">
-      <div class="col-3 border text-center">
-        <img src="https://www.flaticon.com/svg/static/icons/svg/17/17004.svg" alt="Imagen de usuario" width="50%">
+      <div class="col-lg-3 col-12 border text-center">
+        <img id="image-container" class="border border-dark rounded-circle mt-3" src="img/profile-img.svg"
+          alt="Imagen de usuario" width="50%"><br>
+        <input type="url" class="form-control mt-4" id="image-url" placeholder="Inserte URL"><br>
+        <button type="button" class="btn btn-primary" id="image-profile">
+          Aplicar imagen
+        </button>
+        <!--
+        <canvas id="canvas" class="rounded-circle bg-dark" style="width:100%; height: 90%;">
+            
+          </canvas>
+          <input type="file" name="new-image" id="new-image" accept="image/*" multiple="false" onchange="uploadImage();">
+        -->
       </div>
-      <div class="col-9 py-3 border">
-        <p>Nombre: </p>
-        <p>Apellido: </p>
-        <p>Fecha de Nacimiento: </p>
-        <p>E-mail: </p>
-        <p>Teléfono: </p>
+      <div class="col-lg-9 col-12 py-3 border">
+        <table class="table" id="profile-container">
+
+        </table>
+        <hr>
         <!-- Button trigger modal -->
         <div class="text-center">
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Editar Perfil
+            Editar Perfil Completo
           </button>
         </div>
+        <!--alert-->
+        <div id="modal-message">
+
+        </div>
+        <!-------->
       </div>
     </div>
     <!-- Modal -->
@@ -85,16 +102,31 @@
           </div>
           <div class="modal-body">
             <div class="form-group">
-              <input class="form-control my-3" type="text" name="first-name" id="first-name" placeholder="Nombre">
-              <input class="form-control my-3" type="text" name="last-name" id="last-name" placeholder="Apellido">
-              <input class="form-control my-3" type="date" name="birthday" id="birthday">
-              <input class="form-control my-3" type="email" name="email" id="email" placeholder="Email">
-              <input class="form-control my-3" type="text" name="phone" id="phone" placeholder="Teléfono">
+              <!--FIRST NAME-->
+              <input class="form-control my-3" type="text" name="first-name" id="first-name" placeholder="Nombre" onblur="checkFirstName();">
+              <!--message-->
+              <p id="fn-message" style="display: none;"></p>
+              <!--LAST NAME-->
+              <input class="form-control my-3" type="text" name="last-name" id="last-name" placeholder="Apellido" onblur="checkLastName();">
+              <!--message-->
+              <p id="ln-message" style="display: none;"></p>
+              <!--BIRTHDAY-->
+              <input class="form-control my-3" type="text" name="birthday" id="birthday" onblur="checkBirthday()" placeholder="Fecha de Nacimiento">
+              <!--message-->
+              <p id="bd-message" style="display: none;"></p>
+              <!--EMAIL-->
+              <input class="form-control my-3" type="email" name="email" id="email" placeholder="Email" onblur="checkEmail();">
+              <!--message-->
+              <p id="em-message" style="display: none;"></p>
+              <!--PHONE-->
+              <input class="form-control my-3" type="text" name="phone" id="phone" placeholder="Teléfono" onblur="checkPhoneNumber()">
+              <!--message-->
+              <p id="ph-message" style="display: none;"></p>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary">Guardar</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="save-profile">Guardar</button>
           </div>
         </div>
       </div>
@@ -123,6 +155,7 @@
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/dropzone.js"></script>
+  <script src="js/Templates/profile-template.js"></script>
   <script src="js/init.js"></script>
   <script src="js/my-profile.js"></script>
 </body>
