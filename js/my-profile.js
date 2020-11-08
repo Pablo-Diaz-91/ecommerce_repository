@@ -99,8 +99,6 @@ function checkPhoneNumber(){
     }
 }
 
-
-
 function checkInputs(){
     if (checkFirstName() && checkLastName() && checkBirthday() && checkEmail() && checkPhoneNumber()){
         return true;
@@ -109,11 +107,11 @@ function checkInputs(){
 }
 
 
-
 document.addEventListener("DOMContentLoaded", function (e) {
     let container = document.getElementById('profile-container');
     let imageContainer = document.getElementById('image-container');
     
+    /*--For save-profile event--*/
     document.getElementById('save-profile').addEventListener('click', function () {
             let name = document.getElementById('first-name');
             let lastName = document.getElementById('last-name');
@@ -132,10 +130,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
             }));
             
             message.innerHTML = modalComplete();
-            let profile = localStorage.getItem('profile');
-            profile = JSON.parse(profile);
-            let userLogged = localStorage.getItem('user-logged');
-            userLogged = JSON.parse(userLogged);
+            let profile = JSON.parse(localStorage.getItem('profile'));
+            let userLogged = JSON.parse(localStorage.getItem('user-logged'));
             container.innerHTML = profileTemplate(profile, userLogged);
         }
         else {
@@ -143,43 +139,53 @@ document.addEventListener("DOMContentLoaded", function (e) {
         }
     });
 
+    /*--For image-profile event--*/
     document.getElementById('image-profile').addEventListener('click', function(){
-        
         let image = document.getElementById('image-url');
-
-        localStorage.setItem('profile-image', JSON.stringify({ image: image.value }));
-
-        let profileImage = localStorage.getItem('profile-image');
-        profileImage = JSON.parse(profileImage);
-        imageContainer.src = profileImage.image;
-    })
+        if(image.value != ""){
+            let existImage = true;
     
-    
-    let profile = localStorage.getItem('profile');
-    let userLogged = localStorage.getItem('user-logged');
-    userLogged = JSON.parse(userLogged);
-    let profileImage = localStorage.getItem('profile-image');
+            localStorage.setItem('profile-image', JSON.stringify({ image: image.value }));
+        
+            let profileImage = JSON.parse(localStorage.getItem('profile-image'));
+            imageContainer.src = profileImage.image;
+        }
+        else {
+            if (existImage){
+                imageContainer.src = profileImage.image;
+            }
+            else {
+                imageContainer.src = "img/profile-img.svg";
+            }
+        }
+});
 
+    /*--For drawing profile--*/
+    let profile = JSON.parse(localStorage.getItem('profile'));
+    let userLogged = JSON.parse(localStorage.getItem('user-logged'));
+    let profileImage = JSON.parse(localStorage.getItem('profile-image'));
+    //If there's a user logged
     if(userLogged){
+        //In case that there's a profile image but not a profile
         if(profileImage && !profile){
-            profileImage = JSON.parse(profileImage);
             imageContainer.src = profileImage.image;
             container.innerHTML = emptyProfileTemplate(userLogged);
         }
         else if (profileImage && profile){
-            profileImage = JSON.parse(profileImage);
+            //In case that there's a profile image AND a profile
             imageContainer.src = profileImage.image;
-            profile = JSON.parse(profile);
             container.innerHTML = profileTemplate(profile, userLogged);
         }
         else if (!profileImage && profile){
-            profile = JSON.parse(profile);
+            //In case that there's not a profile image BUT there's a profile
             container.innerHTML = profileTemplate(profile, userLogged);
         }
         else {
+            //In case that there's no profile image and no profile
             container.innerHTML = emptyProfileTemplate(userLogged);
         }
     }
+    //If there's no user logged
     else {
         window.location = "index.html";
     }
