@@ -10,7 +10,7 @@ function emptyProfileTemplate(userLogged){
         <tr>
             <td>Nombre: </td>
             <td></td>
-            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Editar campo <i class="fas fa-edit"></i></button>
+            <td><button id="name-modal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Editar campo <i class="fas fa-edit"></i></button>
 
                 <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-sm">
@@ -94,27 +94,72 @@ function profileTemplate(profile, userLogged){
         <tr>
             <td>Nombre: </td>
             <td> ${profile.name} </td>
-            <td><a href="#" class="small" id="name-edit"> Editar campo <i class="fas fa-edit"></i></a></td>
+            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Editar campo <i class="fas fa-edit"></i></button>
+
+                <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <input class="form-control my-3" type="text" name="first-name-modal" id="first-name-modal" placeholder="Nombre" onblur="checkFirstName();">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="save-name">Guardar</button>
+                        </div>
+                    </div>
+                </div></td>
         </tr>
         <tr>
             <td>Apellido: </td>
             <td> ${profile.lastName} </td>
-            <td><a href="#" class="small" id="name-edit"> Editar campo <i class="fas fa-edit"></i></a></td>
+            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".last-name">Editar campo <i class="fas fa-edit"></i></button>
+
+                <div class="modal fade bd-example-modal-sm last-name" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <input class="form-control my-3" type="text" name="last-name-modal" id="last-name-modal" placeholder="Apellido" onblur="checkLastName();">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="save-last-name">Guardar</button>
+                        </div>
+                    </div>
+                </div></td>
         </tr>
         <tr>
             <td>Fecha de Nacimiento: </td>
             <td> ${profile.birthday} </td>
-            <td><a href="#" class="small" id="name-edit"> Editar campo <i class="fas fa-edit"></i></a></td>
+            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".birthday">Editar campo <i class="fas fa-edit"></i></button>
+
+                <div class="modal fade bd-example-modal-sm birthday" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <input class="form-control my-3" type="text" name="birthday-modal" id="birthday-modal" placeholder="Fecha de Nacimiento" onblur="checkBirthday();">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="save-birthday">Guardar</button>
+                        </div>
+                    </div>
+                </div></td>
         </tr>
         <tr>
             <td>Email: </td>
             <td> ${profile.email} </td>
-            <td><a href="#" class="small" id="name-edit"> Editar campo <i class="fas fa-edit"></i></a></td>
+            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".email-modal">Editar campo <i class="fas fa-edit"></i></button>
+
+                <div class="modal fade bd-example-modal-sm email-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <input class="form-control my-3" type="text" name="email-modal" id="email-modal" placeholder="Email" onblur="checkEmail();">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="save-email">Guardar</button>
+                        </div>
+                    </div>
+                </div></td>
         </tr>
         <tr>
             <td>Teléfono: </td>
             <td> ${profile.phone} </td>
-            <td><a href="#" class="small" id="name-edit"> Editar campo <i class="fas fa-edit"></i></a></td>
+            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".phone-modal">Editar campo <i class="fas fa-edit"></i></button>
+
+                <div class="modal fade bd-example-modal-sm phone-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <input class="form-control my-3" type="text" name="phone-modal" id="phone-modal" placeholder="Teléfono" onblur="checkPhoneNumber();">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="save-phone">Guardar</button>
+                        </div>
+                    </div>
+                </div></td>
         </tr>
     </tbody>
         `
