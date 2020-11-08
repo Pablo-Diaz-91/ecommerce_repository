@@ -11,7 +11,7 @@ function productDetailsTemp(products){
 function relatedProducts(products, i){
     return `    <div class="col-lg-6 col-12">
                         <a href="#">
-                            <div class="row border">
+                            <div class="row border related-container">
                                 <div class="col-lg-6 col-12">
                                     <img class="imgRelated" src="${products[i].imgSrc}">
                                 </div>
