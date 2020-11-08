@@ -429,19 +429,14 @@ p.soldCount {
   margin-top: 40px;
   padding: 10px;
 }
-
-.relatedProd {
-  display: flex;
-  margin: 0 10px;
-  width: 500px;
-  padding: 20px;
-  border: 1px solid gray;
-  background-color: lightgray;
-}
 */
 
+.related-container {
+  height: 20rem;
+  align-items: center;
+}
+
 .relatedProd a {
-  display: flex;
   text-decoration: none;
   color: black;
 }
