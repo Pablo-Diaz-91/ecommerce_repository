@@ -142,8 +142,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
     /*--For image-profile event--*/
     document.getElementById('image-profile').addEventListener('click', function(){
         let image = document.getElementById('image-url');
+        
         if(image.value != ""){
-            let existImage = true;
     
             localStorage.setItem('profile-image', JSON.stringify({ image: image.value }));
         
@@ -151,7 +151,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
             imageContainer.src = profileImage.image;
         }
         else {
-            if (existImage){
+            if (image.value == "" && imageContainer.src != "img/profile-img.svg"){
+                let profileImage = JSON.parse(localStorage.getItem('profile-image'));
                 imageContainer.src = profileImage.image;
             }
             else {
