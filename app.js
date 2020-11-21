@@ -1,5 +1,4 @@
 
-const express = require('express');
 const categories = require('./json/categories.json');
 const publish_product = require('./json/publish_product.json');
 const category_info = require('./json/category_info.json');
@@ -11,8 +10,14 @@ const cart_buy = require('./json/cart_buy.json');
 const cart_challenge = require('./json/cart_challenge.json');
 
 
+const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
+
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json())
 
 app.use(function (req, res, next){
     res.header("Access-Control-Allow-Origin", "*");
