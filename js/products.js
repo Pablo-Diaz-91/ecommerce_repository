@@ -92,17 +92,17 @@ function productDetails(){
 
 /* --- FUNCIÓN MAQUETA PRODUCTOS --- */
 function showProducts(array) {
-    let contenido = "";
+    let content = "";
 
     for (let i = 0 ; i < array.length ; i++){
         let productList = array[i];
 
         if (((minPrice == undefined) || (minPrice != undefined && parseInt(productList.cost) >= minPrice)) && ((maxPrice == undefined) || (maxPrice != undefined && parseInt(productList.cost) <= maxPrice))) {
             
-            contenido += productShown(productList, i);
+            content += productShown(productList, i);
         }    
         
-        document.getElementById("product-list").innerHTML = contenido;
+        document.getElementById("product-list").innerHTML = content;
     }
     changeImg();
 }
