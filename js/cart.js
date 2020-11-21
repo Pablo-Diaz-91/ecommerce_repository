@@ -4,7 +4,7 @@
 let cartContent = [];
 
 function calcTotal(){
-    //Función que calcula el total en base a los valores traidos del innerHTML donde se encuentran los valores del subtotal
+    //Calcula el total en base a los valores traidos del innerHTML donde se encuentran los valores del subtotal
     let total = 0;
     let sub = document.getElementsByClassName("subtotal");
     for (let i = 0; i < sub.length; i++){
@@ -24,7 +24,7 @@ function calcSubtotal(price, i) {
 }
 
 function currencyChanges(){
-    let newCurrency;
+    //Cambia el currency de acuerdo al value del radio button seleccionado (por defecto UYU).
     let currency = document.getElementsByName('currency');
     for (let i = 0 ; i < currency.length ; i++){
         if (currency[i].checked) {
@@ -34,10 +34,12 @@ function currencyChanges(){
 }
 
 function showCartContent(array) {
+    //Muestra el contenido del carrito
     let content = "";
     
     for(let i = 0; i < array.length; i++) {
         let productsCart = array[i];
+        
         /*----conversion de moneda en base a currency dado----*/
             let newCurrency = currencyChanges();
             let newPrice;
@@ -80,7 +82,7 @@ for (let i = 0 ; i < currencyRadios.length ; i++){
 }
 
 function calcTotalDeliv() {
-    //Función que calcula el total con envío haciendo uso del valor total y agregando el valor calculado sobre los values del tipo de envío (15, 7, 5)
+    //Calcula el total con envío según el valor total más el valor calculado sobre los values del tipo de envío (15, 7, 5)
     let total = parseInt(document.getElementById('total').innerHTML);
     let delivery;
     let deliveryCost;
