@@ -198,7 +198,7 @@ FUNCIÓN P.4
 [Función que usamos para mostrar los productos en la página de Productos]
 
 1. Creamos la función showProducts que recibe por parámetro un array.
-2. Declaramos una variable local llamada "contenido" que iniciaremos como un string vacío.
+2. Declaramos una variable local llamada "content" que iniciaremos como un string vacío.
 3. Hacemos un loop con el método for para recorrer los elementos del array.
 4. Creamos una variable local de nombre "productList" que guardará en cada iteración del loop del paso 3 el elemento del array con el índice "i" declarado en el for loop.
 4. Condicional (1 if):
