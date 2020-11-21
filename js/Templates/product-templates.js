@@ -1,31 +1,31 @@
 function productShown(productList, i){
     return `
-        <div class="col-lg-5">
+            <div class="col-xl-4 col-md-6 mb-3">
+                <div class="card product-content">
+                    
+                        <img style="width:100%" class="card-img-top border-bottom" src=${productList.imgSrc} alt="Productos">
+                    
+                    <div class="card-body d-flex flex-column">
+                        
+                            <h3 class="card-title text-center" id=${i}>${productList.name}</h3>
+                        
+                        
+                            <p class="card-text"> Descripción: ${productList.description}</p>
+                        
+                        <div class="justify-content-center mt-auto">
+                        
+                            <p class="price"><strong> Precio: </strong>${productList.currency}  ${productList.cost}</p>
+                        
+                        
+                            <p class="soldCount">Cantidad vendidos: ${productList.soldCount}</p>
+                        
+                            <button class="btn-block productDetails" onclick="productDetails()">Ver producto</button>
 
-            <div class="row my-3">
-                <div class="product-content my-auto">
-                    <div class="col-12 mb-3">
-                        <img style="width:100%" class="product-img" src=${productList.imgSrc} alt="Productos">
-                    </div>
-                    <div class="col-12">
-                        <h3 id=${i}>${productList.name}</h3>
-                    </div>
-                    <div class="col-12">
-                        <p class="description"> Descripción: ${productList.description}</p>
-                    </div>
-                    <div class="col-12">
-                        <p class="price"><strong> Precio: </strong>${productList.currency}  ${productList.cost}</p>
-                    </div>
-                    <div class="col-12">
-                        <p class="soldCount">Cantidad vendidos: ${productList.soldCount}</p>
-                    </div>
-                    <div class="col-12">
-                        <button class="btn-block productDetails" onclick="productDetails()">Ver producto</button>
+                        </div>
+
                     </div>
                 </div>
             </div>
-
-        </div>
 
             `;
 }
